@@ -18,22 +18,7 @@ def get_db():
     finally:
         db.close()
 
-
-@app.post("/news/", response_model= schemas.New)
-def create_new(new: schemas.NewCreate, db: Session = Depends(get_db)):
-    db_new = crud.get_new_by_id(db, id =new.id)
-    if db_new:
-        raise HTTPException(status_code=400, detail="No existe noticia con ese id")
-    return crud.create_new(db=db, new=new)
-
-
-
-
-
-@app.get("/news/{new_id}", response_model=schemas.New)
-def read_new(new_id: int, db: Session = Depends(get_db)):
-    db_new = crud.get_new(db, new_id=new_id)
-    if db_new is None:
-        raise HTTPException(status_code=404, detail="New not found")
-    return db_new
-
+@app.get("/news/", response_model=List[schemas.News])
+def read_news(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    news = crud.get_news(db, skip=skip, limit=limit)
+    return news

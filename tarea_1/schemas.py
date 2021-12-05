@@ -1,31 +1,14 @@
 from typing import List, Optional
+from datetime import datetime, date
 
 from pydantic import BaseModel
 
-class NewBase(BaseModel):
+class News(BaseModel):
     title: str
-    date: str
+    date: date
     url: str
     media_outlet: str
-
-class NewCreate(NewBase):
-    pass
-
-class New(NewBase):
-    id: int
-    value_id: int
-
-    class Config:
-        orm_mode = True
-
-
-
-class CategoryBase(BaseModel):
-    value: str
-
-class Has_category(CategoryBase):
-
-    has_category: List[New] = []
+    category: str
 
     class Config:
         orm_mode = True
