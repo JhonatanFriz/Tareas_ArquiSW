@@ -1,7 +1,8 @@
+from typing import Dict, Any, Type
 from typing import List, Optional
 from datetime import datetime, date
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 class News(BaseModel):
     id: int
@@ -13,11 +14,4 @@ class News(BaseModel):
 
     class Config:
         orm_mode = True
-
-
-
-#class HasCategory(CatModel):
-#    value : str
-#
-#    class Config:
-#        orm_mode = True
+        allow_mutation = True

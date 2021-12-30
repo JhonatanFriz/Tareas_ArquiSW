@@ -12,4 +12,9 @@ class News(Base):
     date = Column(Date) 
     url = Column(String(180), unique=True)
     media_outlet = Column(String(25))
-    category = Column(String(35))
+    category = Column(String(15))
+
+class HasCategory(Base):
+    __tablename__ = 'has_category'
+
+    value = Column(String(15), primary_key=True, index=True)
