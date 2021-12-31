@@ -39,34 +39,34 @@ services:
           - network
         #network_mode: "default"
 
+    moneda_database:
+        image: mariadb:10.1.48
+        ports:
+          - "24306:3300"
+        container_name: moneda_database
+        networks:
+          - network
+        environment:
+            MYSQL_ROOT_PASSWORD: "root"
+        command:
+          - "--character-set-server=utf8mb4"
+          - "--collation-server=utf8mb4_unicode_ci"
+        volumes:
+          - ./moneda_database:/var/lib/mysql
+        restart: 'always'
 
-    bank_database:
-      image: mariadb:10.1.48
-      ports:
-        - "23307:3307"
-      container_name: bank_database
-      networks:
-        - network
-      environment:
-          MYSQL_ROOT_PASSWORD: "root"
-      command:
-        - "--character-set-server=utf8mb4"
-        - "--collation-server=utf8mb4_unicode_ci"
-      volumes:
-        - ./bank_database:/var/lib/mysql
-      restart: 'always'
-
-    game_manager:
+    lanza_moneda:
         build:
-          context: ./game_manager
+          context: ./lanza_moneda
           args:
             - DATABASE_IP=$DATABASE_IP 
-        container_name: game_manager
+        container_name: lanza_moneda
         environment:
           - RABBITMQ_HOST=rabbitmq
         networks: 
           - network
         #network_mode: "default"
+
 
     rabbitmq:
         image: rabbitmq:3-management

@@ -75,17 +75,17 @@ async def cumpleaños(ctx):
     print("send a new mesage to rabbitmq: "+message)
     channelMQ.basic_publish(exchange='cartero', routing_key="birthday", body=message)
 
-@bot.command(name='saldo', help ='Permite conocer el saldo de un miembro de la GUILD que se pasa en parámetro. Ejemplo: !saldo Xz')
-async def sald(ctx):
+@bot.command(name='lanza-moneda', help='Permite iniciar una jugada, por ejemplo: !lanza-moneda JFriz cara')
+async def lanzar(ctx):
     message =  ctx.message.content
     print("send a new mesage to rabbitmq: "+message)
-    channelMQ.basic_publish(exchange='cartero', routing_key="saldo", body=message)
+    channelMQ.basic_publish(exchange='cartero', routing_key="lanza-moneda", body=message)
 
-@bot.command(name='lanza_moneda', help ='Permite jugar a lanzar una moneda al aire (cara o sello). Ejemplo: !lanza_moneda Xz cara 50')
-async def lanza_moned(ctx):
+@bot.command(name='resultados', help='Permite conocer el conteo de partidas ganadas y perdidas, por ejemplo: !resultados JFriz')
+async def lanzar(ctx):
     message =  ctx.message.content
     print("send a new mesage to rabbitmq: "+message)
-    channelMQ.basic_publish(exchange='cartero', routing_key="saldo", body=message)
+    channelMQ.basic_publish(exchange='cartero', routing_key="lanza-moneda", body=message)
 ############ CONSUMER ###############
 
 import threading

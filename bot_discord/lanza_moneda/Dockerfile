@@ -9,7 +9,7 @@ ENV PYTHONUNBUFFERED 1
 ARG DATABASE_IP
 ENV DATABASE_IP $DATABASE_IP
 
-COPY ./create_databasegame.py ./create_databasegame.py
-COPY ./managerBank.py ./managerBank.py
+COPY ./create_database_moneda.py ./create_database_moneda.py
+COPY ./moneda_manager.py ./moneda_manager.py
 
-CMD ["python", "managerBank.py"]
+CMD ["python", "moneda_manager.py"]

@@ -6,11 +6,12 @@ def create_database(db_connection,db_name,cursor):
 	cursor.execute(f"COMMIT;")
 	cursor.execute(f"USE {db_name};")
 	
-	# Tabla news
-	cursor.execute('''CREATE TABLE cuentas (
+	# Tabla cuenta
+	cursor.execute('''CREATE TABLE cuenta (
 		id_cuenta INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
 		member VARCHAR(200),
-		saldo INT
+		ganados INT,
+        perdidos INT,
 		);''')
 
 	cursor.execute("SET GLOBAL time_zone = 'UTC';")
@@ -20,8 +21,8 @@ def create_database(db_connection,db_name,cursor):
 
 def insert_data(cursor):
     print("insert")
-    cursor.execute('''INSERT INTO cuentas (member,saldo) VALUES
-    ('Xz','500');
+    cursor.execute('''INSERT INTO cuenta (member,ganados,perdidos) VALUES
+    ('JFriz','0','0');
     ''')
     cursor.execute("COMMIT;") 
 
@@ -30,13 +31,13 @@ def insert_data(cursor):
 def main():
 	print("start creating database...")
 
-	DATABASE = "bank"
+	DATABASE = "jugadas"
 
 	DATABASE_IP = str(os.environ['DATABASE_IP'])
 
 	DATABASE_USER = "root"
 	DATABASE_USER_PASSWORD = "root"
-	DATABASE_PORT=3306
+	DATABASE_PORT=3300
 
 	not_connected = True
 
